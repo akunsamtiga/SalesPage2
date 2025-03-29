@@ -4,40 +4,35 @@ import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay, EffectFade } from "swiper/modules";
+import { Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 
+// Data testimoni
 const testimonials = [
   {
-    name: "Kim Ji-soo",
-    role: "CEO Beauty Startup",
-    image: "/images/pp1.png",
-    quote:
-      "Produk ini benar-benar luar biasa! Saya mengalami peningkatan omzet hingga 200% dalam 3 bulan pertama.",
-  },
-  {
-    name: "Park Min-young",
-    role: "Digital Marketer",
+    name: "Sarah Tanaka",
+    role: "CEO, Tech Innovations",
     image: "/images/pp3.png",
-    quote:
-      "Sangat puas dengan layanan ini! Strategi pemasaran yang diberikan sangat efektif dan mudah diterapkan.",
+    quote: "Platform ini meningkatkan metrik keterlibatan pelanggan kami sebesar 180% dalam kuartal pertama penerapan.",
   },
   {
-    name: "Lee Ji-eun",
-    role: "Entrepreneur",
+    name: "James Wilson",
+    role: "CMO, Global Solutions",
+    image: "/images/pp4.png",
+    quote: "Layanan luar biasa dengan ROI yang dapat diukur. Tingkat konversi kami meningkat 2,5x sekaligus mengurangi biaya akuisisi.",
+  },
+  {
+    name: "Emma Rodriguez",
+    role: "Direktur, Venture Capital",
     image: "/images/pp5.png",
-    quote:
-      "Tidak pernah menyangka bisnis saya bisa berkembang secepat ini. Benar-benar investasi terbaik!",
+    quote: "Wawasan strategis yang diberikan telah menjadi hal yang sangat diperlukan dalam strategi pertumbuhan perusahaan portofolio kami.",
   },
 ];
 
 const Testimonials = () => {
-  // Intersection Observer
   const controls = useAnimation();
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
   useEffect(() => {
     if (inView) {
@@ -46,110 +41,112 @@ const Testimonials = () => {
   }, [controls, inView]);
 
   return (
-    <section ref={ref} className="py-20 px-6 md:px-12 bg-white">
-      <div className="max-w-4xl mx-auto text-center">
-        {/* Judul Section */}
-        <motion.h2
-          className="text-4xl md:text-5xl font-bold text-[#8B5E3B] leading-tight"
+    <section ref={ref} className="py-24 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        {/* Header Section */}
+        <motion.div
+          className="text-center mb-16"
           initial="hidden"
           animate={controls}
           variants={{
-            hidden: { opacity: 0, y: 30 },
-            visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+            hidden: { opacity: 0, y: 20 },
+            visible: { 
+              opacity: 1, 
+              y: 0,
+              transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
+            },
           }}
         >
-          Apa Kata Mereka?
-        </motion.h2>
-        <p className="text-gray-600 mt-4 text-lg">
-          Ribuan pelanggan telah merasakan manfaat luar biasa dari layanan kami.
-        </p>
-      </div>
+          <h2 className="text-3xl font-light text-gray-900 sm:text-4xl">
+            Dipercaya oleh <span className="font-medium">Para Pemimpin Industri</span>
+          </h2>
+          <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-600">
+            Para profesional di organisasi terkemuka berbagi pengalaman mereka.
+          </p>
+        </motion.div>
 
-      {/* Swiper Slider */}
-      <motion.div
-        className="mt-14 max-w-3xl mx-auto"
-        initial="hidden"
-        animate={controls}
-        variants={{
-          hidden: { opacity: 0, y: 30 },
-          visible: {
-            opacity: 1,
-            y: 0,
-            transition: { staggerChildren: 0.2, duration: 0.8 },
-          },
-        }}
-      >
-        <Swiper
-          modules={[Navigation, Pagination, Autoplay, EffectFade]}
-          spaceBetween={20}
-          slidesPerView={1}
-          autoplay={{ delay: 5000, disableOnInteraction: false }}
-          pagination={{ clickable: true, dynamicBullets: true }}
-          navigation={false}
-          effect="fade"
-          className="swiper-container"
-        >
-          {testimonials.map((testimonial, index) => (
-            <SwiperSlide key={index}>
-              <motion.div
-                className="bg-white bg-opacity-75 backdrop-blur-md p-8 rounded-xl shadow-lg text-center flex flex-col items-center border border-[#E0C097] transition duration-300 transform hover:scale-105 hover:shadow-2xl"
-                variants={{
-                  hidden: { opacity: 0, y: 30 },
-                  visible: { opacity: 1, y: 0 },
-                }}
-              >
-                <motion.img
-                  src={testimonial.image}
-                  alt={testimonial.name}
-                  className="w-24 h-24 rounded-full object-cover border-4 border-[#E0C097] mb-4 shadow-lg"
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                />
-                <motion.p
-                  className="text-lg text-gray-700 italic font-serif"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.5 }}
-                >
-                  "{testimonial.quote}"
-                </motion.p>
-                <motion.h3
-                  className="mt-4 text-xl font-semibold text-[#8B5E3B]"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.6 }}
-                >
-                  {testimonial.name}
-                </motion.h3>
-                <motion.span
-                  className="text-gray-500"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.7 }}
-                >
-                  {testimonial.role}
-                </motion.span>
-              </motion.div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </motion.div>
-
-      {/* Call-to-Action */}
-      <div className="text-center mt-14">
-        <motion.a
-          href="#cta"
-          className="bg-[#8B5E3B] text-white px-8 py-4 rounded-md font-semibold text-xl shadow-lg hover:bg-[#6E3F22] transition duration-300 transform hover:scale-105"
+        {/* Slider Testimoni */}
+        <motion.div
+          className="max-w-4xl mx-auto"
           initial="hidden"
           animate={controls}
           variants={{
-            hidden: { opacity: 0, scale: 0.9 },
-            visible: { opacity: 1, scale: 1, transition: { duration: 0.5, delay: 0.9 } },
+            hidden: { opacity: 0 },
+            visible: { 
+              opacity: 1,
+              transition: { delay: 0.3, duration: 0.8 }
+            },
           }}
         >
-          Bergabung Sekarang! 🚀
-        </motion.a>
+          <Swiper
+            modules={[Autoplay, EffectFade]}
+            spaceBetween={30}
+            slidesPerView={1}
+            autoplay={{ 
+              delay: 8000, 
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true 
+            }}
+            effect="fade"
+            loop={true}
+            className="swiper-container"
+          >
+            {testimonials.map((testimonial, index) => (
+              <SwiperSlide key={index}>
+                <div className="bg-white p-10 rounded-xl shadow-sm border border-gray-200">
+                  <div className="flex flex-col items-center text-center">
+                    <motion.img
+                      src={testimonial.image}
+                      alt={testimonial.name}
+                      className="w-20 h-20 rounded-full object-cover mb-6 grayscale hover:grayscale-0 transition-all duration-500"
+                      initial={{ scale: 0.9, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 0.6, delay: 0.5 }}
+                    />
+                    <motion.blockquote
+                      className="text-xl font-light text-gray-700 max-w-2xl leading-relaxed"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.7 }}
+                    >
+                      "{testimonial.quote}"
+                    </motion.blockquote>
+                    <motion.div
+                      className="mt-8"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.6, delay: 0.9 }}
+                    >
+                      <h3 className="text-lg font-medium text-gray-900">
+                        {testimonial.name}
+                      </h3>
+                      <p className="text-gray-500 text-sm mt-1">
+                        {testimonial.role}
+                      </p>
+                    </motion.div>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </motion.div>
+
+        {/* Indikator Kepercayaan */}
+        <motion.div
+          className="mt-20 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
+        >
+          <p className="text-xs font-medium text-gray-500 tracking-wider mb-6">
+            DIPERCAYA OLEH PERUSAHAAN INOVATIF DI SELURUH DUNIA
+          </p>
+          <div className="flex flex-wrap justify-center gap-8 md:gap-12 opacity-80">
+            {['Forbes', 'TechCrunch', 'Bloomberg', 'Harvard Business Review', 'The Economist'].map((company, i) => (
+              <span key={i} className="text-base font-medium text-gray-700">{company}</span>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );

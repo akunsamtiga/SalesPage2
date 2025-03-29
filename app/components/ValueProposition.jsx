@@ -1,108 +1,133 @@
-"use client";
-
-import { motion, useAnimation } from "framer-motion";
-import { useEffect } from "react";
-import { useInView } from "react-intersection-observer";
-import { FaCouch, FaTools, FaShieldAlt, FaStar } from "react-icons/fa"; // Ikon furnitur
-
-const features = [
-  {
-    icon: <FaCouch className="h-12 w-12 text-[#8B5E3B]" />,
-    title: "Desain Elegan & Mewah",
-    description: "Kami menghadirkan furnitur dengan desain eksklusif yang menambah estetika ruangan Anda.",
-  },
-  {
-    icon: <FaTools className="h-12 w-12 text-[#4CAF50]" />,
-    title: "Kualitas Terbaik",
-    description: "Menggunakan material premium yang tahan lama dengan pengerjaan yang presisi.",
-  },
-  {
-    icon: <FaShieldAlt className="h-12 w-12 text-[#6A5ACD]" />,
-    title: "Jaminan Keamanan",
-    description: "Setiap produk diuji ketahanan dan keamanannya untuk kenyamanan pengguna.",
-  },
-  {
-    icon: <FaStar className="h-12 w-12 text-[#FFD700]" />,
-    title: "Dipercaya oleh Banyak Klien",
-    description: "Digunakan oleh hunian mewah dan bisnis ternama di seluruh dunia.",
-  },
-];
+"use client"
+import React from 'react';
+import { motion } from 'framer-motion';
 
 const ValueProposition = () => {
-  // Intersection Observer
-  const controls = useAnimation();
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
-
-  useEffect(() => {
-    if (inView) {
-      controls.start("visible");
+  const features = [
+    {
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      ),
+      title: "Lightning Fast",
+      description: "Optimized performance that delivers results in milliseconds, not seconds."
+    },
+    {
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15l8-8m0 0l-8-8m8 8H4" />
+        </svg>
+      ),
+      title: "Seamless Integration",
+      description: "Works effortlessly with your existing tools and workflows."
+    },
+    {
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+        </svg>
+      ),
+      title: "Enterprise Grade",
+      description: "Reliable infrastructure that scales with your business needs."
+    },
+    {
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+      ),
+      title: "Bank-Level Security",
+      description: "Your data is protected with industry-leading encryption standards."
     }
-  }, [controls, inView]);
+  ];
+
+  const container = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const item = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 10
+      }
+    }
+  };
 
   return (
-    <section ref={ref} className="py-20 px-6 md:px-12 bg-[#FAF3E0] text-gray-900">
-      <div className="max-w-5xl mx-auto text-center">
-        {/* Judul Section */}
-        <motion.h2
-          className="text-4xl md:text-5xl font-bold text-[#8B5E3B] leading-tight"
+    <section className="py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
           initial="hidden"
-          animate={controls}
-          variants={{
-            hidden: { opacity: 0, y: 30 },
-            visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
-          }}
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={container}
+          className="text-center mb-16"
         >
-          Mengapa Memilih Furnitur Kami?
-        </motion.h2>
-        <p className="text-gray-700 mt-4 text-lg">
-          Kami tidak hanya menawarkan furnitur, tetapi juga pengalaman dan keindahan dalam setiap ruang.
-        </p>
-      </div>
+          <motion.h2 variants={item} className="text-3xl font-light text-gray-900 sm:text-4xl">
+            Why <span className="font-medium">Choose Us</span>
+          </motion.h2>
+          <motion.p variants={item} className="mt-4 max-w-2xl mx-auto text-lg text-gray-600">
+            Premium solutions designed for businesses that demand excellence without compromise.
+          </motion.p>
+        </motion.div>
 
-      {/* Grid untuk Value Proposition */}
-      <motion.div
-        className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 max-w-6xl mx-auto mt-14"
-        initial="hidden"
-        animate={controls}
-        variants={{
-          hidden: { opacity: 0, y: 30 },
-          visible: {
-            opacity: 1,
-            y: 0,
-            transition: { staggerChildren: 0.2, duration: 0.8 },
-          },
-        }}
-      >
-        {features.map((feature, index) => (
-          <motion.div
-            key={index}
-            className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center text-center hover:shadow-xl transition duration-300 transform hover:scale-105"
-            variants={{
-              hidden: { opacity: 0, y: 30 },
-              visible: { opacity: 1, y: 0 },
-            }}
-          >
-            <div className="mb-4">{feature.icon}</div>
-            <h3 className="text-xl font-semibold text-gray-800">{feature.title}</h3>
-            <p className="text-gray-600 mt-2">{feature.description}</p>
-          </motion.div>
-        ))}
-      </motion.div>
-
-      {/* Call-to-Action */}
-      <div className="text-center mt-14">
-        <motion.a
-          href="#cta"
-          className="bg-[#8B5E3B] text-white px-8 py-4 rounded-md font-semibold text-xl shadow-lg hover:bg-[#6E3F22] transition duration-300 transform hover:scale-105"
+        <motion.div
           initial="hidden"
-          animate={controls}
-          variants={{
-            hidden: { opacity: 0, scale: 0.9 },
-            visible: { opacity: 1, scale: 1, transition: { duration: 0.5, delay: 0.6 } },
-          }}
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={container}
+          className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4"
         >
-          Lihat Koleksi Kami
-        </motion.a>
+          {features.map((feature, index) => (
+            <motion.div
+              key={index}
+              variants={item}
+              whileHover={{ y: -5 }}
+              className="relative"
+            >
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-100 to-purple-100 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-200"></div>
+              <div className="relative h-full bg-white p-8 rounded-lg border border-gray-100">
+                <div className="flex justify-center">
+                  <div className="flex items-center justify-center w-16 h-16 rounded-full bg-blue-50 text-blue-600">
+                    {feature.icon}
+                  </div>
+                </div>
+                <h3 className="mt-6 text-lg font-medium text-gray-900">{feature.title}</h3>
+                <p className="mt-2 text-base text-gray-600">{feature.description}</p>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+          className="mt-20 text-center"
+        >
+          <p className="text-sm font-medium text-gray-500">
+            TRUSTED BY OVER 2,000 FORWARD-THINKING COMPANIES
+          </p>
+          <div className="mt-6 flex flex-wrap justify-center gap-8 opacity-70">
+            {['Google', 'Microsoft', 'Airbnb', 'Spotify', 'Slack', 'Shopify'].map((company) => (
+              <span key={company} className="text-lg font-medium text-gray-700">{company}</span>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );

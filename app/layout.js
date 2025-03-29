@@ -12,26 +12,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "🚀 Produk Digital Terbaik | Nama Brand",
+  title: "Furnitur Berkualitas untuk Rumah Impian | FurniCraft",
   description:
-    "Temukan solusi terbaik untuk meningkatkan produktivitas dan kesuksesan Anda dengan produk inovatif dari Nama Brand.",
-  keywords: "produk digital, kursus online, sukses bisnis, strategi pemasaran",
-  author: "Nama Brand",
-  openGraph: {
-    title: "🚀 Produk Digital Terbaik | Nama Brand",
-    description:
-      "Temukan solusi terbaik untuk meningkatkan produktivitas dan kesuksesan Anda.",
-    url: "https://www.namabrand.com/",
-    type: "website",
-    images: [
-      {
-        url: "/images/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Gambar Produk Digital",
-      },
-    ],
-  },
+    "Temukan koleksi furniture eksklusif dari FurniCraft yang akan mengubah rumah Anda menjadi ruang hidup yang indah, nyaman, dan fungsional.",
+  keywords: "furniture modern, mebel kayu, sofa nyaman, set kamar tidur, furniture kantor, furnitur ruang tamu",
+  author: "FurniCraft Indonesia",
 };
 
 export default function RootLayout({ children }) {

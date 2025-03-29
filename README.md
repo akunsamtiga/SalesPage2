@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Berikut adalah **README.md** yang menjelaskan proyek **Landing Page Sales Page** dengan teknologi yang digunakan, fitur utama, cara instalasi, dan struktur proyek.  
 
-## Getting Started
+---
 
-First, run the development server:
+```md
+# 🚀 Landing Page - Sales Page Next.js
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Ini adalah **Sales Page** yang dirancang untuk meningkatkan konversi dengan tampilan modern, animasi interaktif, dan pengalaman pengguna terbaik. Dibangun menggunakan **Next.js, Tailwind CSS, dan Framer Motion** untuk performa maksimal.
+
+---
+
+## 🎯 Fitur Utama
+
+✅ **Next.js 14 App Router** untuk SSR & CSR yang cepat.  
+✅ **Tailwind CSS** untuk desain responsif & modern.  
+✅ **Framer Motion** untuk animasi interaktif yang smooth.  
+✅ **Swiper.js** untuk slider Testimonial yang menarik.  
+✅ **Intersection Observer** agar animasi hanya aktif saat elemen masuk layar.  
+✅ **Optimasi SEO & Performance** dengan struktur terbaik.  
+
+---
+
+## 🏗️ Struktur Proyek
+
+```
+📂 sales-page/
+├── 📁 components/       # Komponen UI utama
+│   ├── 📄 CTA.tsx       # Call-to-Action dengan animasi menarik
+│   ├── 📄 FAQ.tsx       # Section FAQ dengan efek expand/collapse
+│   ├── 📄 Hero.tsx      # Hero section dengan headline kuat
+│   ├── 📄 PainSolution.tsx  # Menyajikan masalah & solusi
+│   ├── 📄 Pricing.tsx   # Paket harga eksklusif & elegan
+│   ├── 📄 Testimonials.tsx  # Testimoni pelanggan dengan slider
+│   ├── 📄 ValueProposition.tsx  # Alasan memilih produk/layanan
+│   ├── 📄 VideoSalesLetter.tsx  # Video promosi tanpa overlay play button
+├── 📁 public/images/    # Gambar & ikon
+├── 📄 pages/index.tsx   # Halaman utama (landing page)
+├── 📄 tailwind.config.js # Konfigurasi Tailwind CSS
+├── 📄 README.md         # Dokumentasi proyek
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 🛠️ Instalasi & Menjalankan Proyek
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1️⃣ **Clone repository**
+```bash
+git clone https://github.com/username/sales-page.git
+cd sales-page
+```
 
-## Learn More
+2️⃣ **Install dependencies**
+```bash
+npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+3️⃣ **Jalankan server**
+```bash
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4️⃣ **Buka di browser**  
+Akses `http://localhost:3000`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🎨 Desain & UX
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Modern & Elegan**: Kombinasi warna premium dengan **#FAF3E0** & **#8B5E3B**.  
+- **User Experience Maksimal**: Navigasi yang smooth dan intuitif.  
+- **Mobile-First**: 100% responsif di semua perangkat.  
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📌 Best Practices
+
+✅ **Gunakan Hooks & Functional Components** untuk performa optimal.  
+✅ **Hindari hydration error** dengan memastikan elemen interaktif hanya dirender di client-side.  
+✅ **Gunakan animasi hanya saat elemen masuk layar** (Intersection Observer + Framer Motion).  
+✅ **Gunakan lazy loading untuk gambar & video** agar loading lebih cepat.  
+
+---
+
+## 🎯 Siapa yang Cocok Menggunakan Sales Page Ini?
+
+✔ **Startup & Bisnis Online** yang ingin meningkatkan konversi.  
+✔ **SaaS & Produk Digital** yang butuh halaman landing menarik.  
+✔ **Kursus Online & Pelatihan** yang ingin membangun kredibilitas.  
+
+---
+
+## 🚀 Roadmap Pengembangan
+
+📌 **Versi berikutnya**:  
+- Tambahkan integrasi **Formulir Lead Generation**  
+- Optimasi kecepatan dengan **lazy loading lebih lanjut**  
+- Tambahkan **Dark Mode** untuk variasi tema  
+
+---
+
+💡 **Dibuat dengan ❤️ menggunakan Next.js, Tailwind CSS & Framer Motion**  
+```
+
+---
+
+Ini adalah template **README.md** yang lengkap, mencakup semua aspek penting dari **Sales Page** yang kamu buat. 🚀🎯

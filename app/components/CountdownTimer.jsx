@@ -1,88 +1,121 @@
 "use client";
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import { FaCouch } from "react-icons/fa"; // Ikon furnitur
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
-export default function CountdownTimer() {
-  const targetDate = new Date("2025-04-01T00:00:00").getTime();
-  const [timeLeft, setTimeLeft] = useState(null);
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
+const CountdownTimer = ({ targetDate = '2025-05-31T23:59:59' }) => {
+  const [timeLeft, setTimeLeft] = useState({
+    hari: 0,
+    jam: 0,
+    menit: 0,
+    detik: 0
+  });
 
-  const calculateTimeLeft = () => {
-    const now = new Date().getTime();
-    const difference = targetDate - now;
-
-    if (difference < 0) {
-      return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-    }
-
-    return {
-      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-      hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-      minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
-      seconds: Math.floor((difference % (1000 * 60)) / 1000),
-    };
-  };
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    setTimeLeft(calculateTimeLeft());
-    const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
-    }, 1000);
-    return () => clearInterval(timer);
+    // Memicu animasi
+    const timer = setTimeout(() => setIsVisible(true), 500);
+    return () => clearTimeout(timer);
   }, []);
 
-  if (!timeLeft) return null;
+  useEffect(() => {
+    const calculateTimeLeft = () => {
+      const difference = new Date(targetDate) - new Date();
+      
+      if (difference > 0) {
+        setTimeLeft({
+          hari: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          jam: Math.floor((difference / (1000 * 60 * 60)) % 24),
+          menit: Math.floor((difference / 1000 / 60) % 60),
+          detik: Math.floor((difference / 1000) % 60)
+        });
+      }
+    };
+
+    calculateTimeLeft();
+    const timer = setInterval(calculateTimeLeft, 1000);
+
+    return () => clearInterval(timer);
+  }, [targetDate]);
+
+  // Variasi animasi
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: (i) => ({
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delay: i * 0.1 + 0.3,
+        type: "spring",
+        stiffness: 200,
+        damping: 10
+      }
+    })
+  };
 
   return (
-    <motion.div
-      ref={ref}
-      className="flex flex-col items-center justify-center bg-[#FAF3E0] p-10 my-5 md:my-10 rounded-xl w-full max-w-lg mx-auto text-center relative overflow-hidden"
-      initial={{ opacity: 0, y: 30 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8 }}
-    >
-      {/* Title */}
-      <motion.h2
-        className="text-[#6B4226] text-2xl font-semibold tracking-wide"
-        initial={{ opacity: 0 }}
-        animate={inView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.8, delay: 0.2 }}
-      >
-        Koleksi Baru Segera Hadir ✨
-      </motion.h2>
-      <p className="text-[#8B4513] text-sm mt-2">
-        Hadirkan sentuhan elegan ke dalam rumah Anda.
-      </p>
+    <section className="py-16 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial="hidden"
+          animate={isVisible ? "visible" : "hidden"}
+          variants={containerVariants}
+          className="text-center"
+        >
+          <h2 className="text-lg font-medium text-gray-500 mb-2">
+            PENAWARAN TERBATAS
+          </h2>
+          <p className="text-2xl font-light text-gray-700 mb-8">
+            Promo berakhir dalam:
+          </p>
 
-      {/* Timer */}
-      <div className="flex space-x-4 mt-6">
-        {Object.entries(timeLeft).map(([label, value], index) => (
-          <motion.div
-            key={label}
-            className="flex flex-col items-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: index * 0.2 }}
+          <div className="flex justify-center space-x-4 sm:space-x-6">
+            {Object.entries(timeLeft).map(([unit, value], index) => (
+              <motion.div
+                key={unit}
+                custom={index}
+                variants={itemVariants}
+                className="flex flex-col items-center"
+              >
+                <div className="relative">
+                  <div className="absolute inset-0 bg-white opacity-20 rounded-lg"></div>
+                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center bg-white border border-gray-200 rounded-lg shadow-sm">
+                    <span className="text-2xl sm:text-3xl font-medium text-gray-900">
+                      {value.toString().padStart(2, '0')}
+                    </span>
+                  </div>
+                </div>
+                <span className="mt-2 text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider">
+                  {unit}
+                </span>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+            className="mt-8 text-sm text-gray-500"
           >
-            <motion.div
-              key={value}
-              className="bg-[#D2B48C] text-white font-bold text-3xl w-16 h-16 flex items-center justify-center rounded-lg transition-all duration-500"
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ repeat: Infinity, duration: 1 }}
-            >
-              {value}
-            </motion.div>
-            <p className="text-xs mt-2 text-[#6B4226] uppercase">{label}</p>
-          </motion.div>
-        ))}
+            Jangan lewatkan kesempatan ini! Dapatkan sofa impian Anda sebelum waktu habis.
+          </motion.p>
+        </motion.div>
       </div>
-
-      {/* Ikon */}
-      <motion.div className="mt-6" whileHover={{ scale: 1.1 }}>
-        <FaCouch className="text-[#6B4226] text-4xl" />
-      </motion.div>
-    </motion.div>
+    </section>
   );
-}
+};
+
+export default CountdownTimer;

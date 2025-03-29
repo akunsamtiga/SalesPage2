@@ -1,65 +1,139 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+"use client"
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 
 const VideoSalesLetter = () => {
-  const [isClient, setIsClient] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  
+  // Ganti dengan ID video YouTube Anda
+  const youtubeVideoId = "dQw4w9WgXcQ"; // Contoh ID, ganti dengan ID video Anda
+  const thumbnailUrl = `https://img.youtube.com/vi/${youtubeVideoId}/maxresdefault.jpg`;
+  
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
+    }
+  };
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 10
+      }
+    }
+  };
+
+  const handlePlay = () => {
+    setIsPlaying(true);
+  };
 
   return (
-    <section className="py-20 px-6 md:px-12 bg-[#FAF3E0] text-gray-900">
-      <div className="max-w-5xl mx-auto text-center">
-        {/* Judul Section */}
-        <motion.h2
-          className="text-4xl md:text-5xl font-bold text-[#8B5E3B] leading-tight"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+    <section className="py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          variants={containerVariants}
+          className="text-center mb-16"
         >
-          Tonton Video Ini dan Temukan Rahasia Furnitur Eksklusif!
-        </motion.h2>
-        <p className="text-gray-700 mt-4 text-lg">
-          Video ini akan mengungkapkan bagaimana Anda bisa memiliki furnitur mewah yang meningkatkan estetika dan kenyamanan hunian Anda.
-        </p>
-      </div>
+          <motion.h2 variants={itemVariants} className="text-3xl font-light text-gray-900 sm:text-4xl">
+            <span className="font-medium">Kisah Kami</span> dalam Video
+          </motion.h2>
+          <motion.p variants={itemVariants} className="mt-4 max-w-2xl mx-auto text-lg text-gray-600">
+            Saksikan bagaimana kami mengubah tantangan menjadi pengalaman yang mulus dalam waktu kurang dari 3 menit.
+          </motion.p>
+        </motion.div>
 
-      {/* Container Video hanya dirender di client */}
-      <motion.div
-        className="mt-10 max-w-4xl mx-auto relative rounded-xl overflow-hidden shadow-xl border-4 border-[#8B5E3B]"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-      >
-        {isClient && (
-          <iframe
-            className="w-full aspect-video rounded-lg"
-            src="https://www.youtube.com/embed/qK31qpUJC-A?rel=0&showinfo=0&autoplay=1&mute=1"
-            title="Video Sales Letter"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-        )}
-      </motion.div>
-
-      {/* Call-to-Action */}
-      <div className="text-center mt-14">
-        <motion.a
-          href="#cta"
-          className="bg-[#8B5E3B] text-white px-8 py-4 rounded-md font-semibold text-xl shadow-lg hover:bg-[#6E3F22] transition duration-300"
-          initial={{ opacity: 0, scale: 0.9 }}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.98 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.6 }}
+          transition={{ duration: 0.8 }}
+          className="max-w-4xl mx-auto"
         >
-          Dapatkan Koleksi Eksklusif Sekarang! 🏡✨
-        </motion.a>
+          <div className="aspect-w-16 aspect-h-9 rounded-xl overflow-hidden shadow-lg bg-gray-100">
+            {!isPlaying ? (
+              <div 
+                className="relative cursor-pointer group"
+                onClick={handlePlay}
+              >
+                <img 
+                  src={thumbnailUrl} 
+                  alt="Thumbnail video" 
+                  className="w-full h-full object-cover transition-opacity group-hover:opacity-90"
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-20 h-20 bg-white bg-opacity-80 rounded-full flex items-center justify-center group-hover:bg-opacity-100 transition-all duration-300 transform group-hover:scale-110">
+                    <svg className="w-10 h-10 text-gray-900 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                </div>
+                <div className="absolute bottom-4 left-4 bg-black bg-opacity-70 text-white px-3 py-1 rounded-md text-sm">
+                  3:14
+                </div>
+              </div>
+            ) : (
+              <iframe 
+                className="w-full h-155"
+                src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&rel=0&modestbranding=1`}
+                frameBorder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowFullScreen
+                title="Video produk"
+              />
+            )}
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+          className="mt-16 max-w-3xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-4 text-center"
+        >
+          {[
+            { value: "95%", label: "Tingkat Kepuasan" },
+            { value: "24/7", label: "Dukungan Tersedia" },
+            { value: "3x", label: "Hasil Lebih Cepat" }
+          ].map((item, index) => (
+            <motion.div 
+              key={index}
+              whileHover={{ y: -3 }}
+              className="bg-gray-50 p-4 rounded-lg"
+            >
+              <p className="text-2xl font-medium text-gray-900">{item.value}</p>
+              <p className="text-sm text-gray-500 mt-1">{item.label}</p>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.7 }}
+          className="mt-16 text-center"
+        >
+          <p className="text-sm font-medium text-gray-500 mb-4">
+            SIAP MERASAKAN PERBEDAANNYA?
+          </p>
+          <button className="px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-900 hover:bg-gray-800 transition-all duration-300">
+            Mulai Sekarang
+          </button>
+        </motion.div>
       </div>
     </section>
   );

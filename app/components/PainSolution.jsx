@@ -1,134 +1,156 @@
-"use client"; 
-
-import { motion, useAnimation } from "framer-motion";
-import { useEffect } from "react";
-import { useInView } from "react-intersection-observer";
-import { ExclamationCircleIcon, CheckCircleIcon } from "@heroicons/react/24/solid";
+"use client"
+import React from 'react';
+import { motion } from 'framer-motion';
 
 const PainSolution = () => {
-  // Intersection Observer
-  const controls = useAnimation();
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
-
-  useEffect(() => {
-    if (inView) {
-      controls.start("visible");
+  const painPoints = [
+    {
+      pain: "Wasting resources on inefficient solutions",
+      solution: "Our optimized platform delivers maximum output with minimal resource input, cutting costs by average 40%",
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      )
+    },
+    {
+      pain: "Struggling with complex integrations",
+      solution: "Seamless API-first design works out-of-the-box with your existing stack",
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+        </svg>
+      )
+    },
+    {
+      pain: "Losing customers to poor experience",
+      solution: "Elevate customer satisfaction with our intuitive, high-performance interface",
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        </svg>
+      )
     }
-  }, [controls, inView]);
+  ];
+
+  const container = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const item = {
+    hidden: { x: -20, opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 10
+      }
+    }
+  };
+
+  const solutionItem = {
+    hidden: { x: 20, opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 10
+      }
+    }
+  };
 
   return (
-    <section ref={ref} className="py-20 px-6 md:px-12 bg-white">
-      <div className="max-w-5xl mx-auto text-center">
-        {/* Judul Section */}
-        <motion.h2
-          className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight"
-          initial="hidden"
-          animate={controls}
-          variants={{
-            hidden: { opacity: 0, y: 30 },
-            visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
-          }}
-        >
-          Apakah Anda Mengalami Masalah Ini?
-        </motion.h2>
-        <p className="text-gray-600 mt-4 text-lg">
-          Banyak orang menghadapi tantangan ini sebelum menemukan solusi yang tepat. Jangan khawatir, kami punya jawabannya!
-        </p>
-      </div>
-
-      {/* Grid untuk Menampilkan Masalah & Solusi */}
-      <motion.div
-        className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto mt-14"
-        initial="hidden"
-        animate={controls}
-        variants={{
-          hidden: { opacity: 0, y: 30 },
-          visible: {
-            opacity: 1,
-            y: 0,
-            transition: { staggerChildren: 0.2, duration: 0.8 },
-          },
-        }}
-      >
-        {/* Masalah */}
+    <section className="py-24 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          className="bg-red-50 border-l-8 border-red-500 p-8 rounded-lg shadow-lg transition duration-300 hover:shadow-xl hover:-translate-y-2"
-          variants={{
-            hidden: { opacity: 0, x: -50 },
-            visible: { opacity: 1, x: 0 },
-          }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={container}
+          className="text-center mb-20"
         >
-          <h3 className="flex items-center text-2xl font-semibold text-red-600 mb-5">
-            <ExclamationCircleIcon className="h-7 w-7 text-red-500 mr-2" />
-            Tantangan yang Anda Hadapi
-          </h3>
-          <ul className="mt-5 space-y-4 text-gray-700 text-lg">
-            <li className="flex items-center">
-              <ExclamationCircleIcon className="h-6 w-6 text-red-400 mr-2" />
-              Sulit mendapatkan hasil maksimal?
-            </li>
-            <li className="flex items-center">
-              <ExclamationCircleIcon className="h-6 w-6 text-red-400 mr-2" />
-              Bingung harus mulai dari mana?
-            </li>
-            <li className="flex items-center">
-              <ExclamationCircleIcon className="h-6 w-6 text-red-400 mr-2" />
-              Sudah mencoba berbagai cara tapi gagal?
-            </li>
-            <li className="flex items-center">
-              <ExclamationCircleIcon className="h-6 w-6 text-red-400 mr-2" />
-              Waktu & tenaga terbuang percuma?
-            </li>
-          </ul>
+          <motion.h2 variants={item} className="text-3xl font-light text-gray-900 sm:text-4xl">
+            The <span className="font-medium">Problems</span> We Solve
+          </motion.h2>
+          <motion.p variants={item} className="mt-4 max-w-3xl mx-auto text-lg text-gray-600">
+            Every great solution starts with understanding the pain. Here's how we transform your challenges into opportunities.
+          </motion.p>
         </motion.div>
 
-        {/* Solusi */}
-        <motion.div
-          className="bg-green-50 border-l-8 border-green-500 p-8 rounded-lg shadow-lg transition duration-300 hover:shadow-xl hover:-translate-y-2"
-          variants={{
-            hidden: { opacity: 0, x: 50 },
-            visible: { opacity: 1, x: 0 },
-          }}
-        >
-          <h3 className="flex items-center text-2xl font-semibold text-green-600 mb-5">
-            <CheckCircleIcon className="h-7 w-7 text-green-500 mr-2" />
-            Solusi Terbaik untuk Anda
-          </h3>
-          <ul className="mt-5 space-y-4 text-gray-700 text-lg">
-            <li className="flex items-center">
-              <CheckCircleIcon className="h-6 w-6 text-green-400 mr-2" />
-              🚀 Strategi yang terbukti berhasil
-            </li>
-            <li className="flex items-center">
-              <CheckCircleIcon className="h-6 w-6 text-green-400 mr-2" />
-              🔑 Langkah-langkah jelas & mudah diikuti
-            </li>
-            <li className="flex items-center">
-              <CheckCircleIcon className="h-6 w-6 text-green-400 mr-2" />
-              🛠️ Tools dan resources eksklusif
-            </li>
-            <li className="flex items-center">
-              <CheckCircleIcon className="h-6 w-6 text-green-400 mr-2" />
-              🎯 Dapatkan hasil lebih cepat & efektif
-            </li>
-          </ul>
-        </motion.div>
-      </motion.div>
+        <div className="max-w-4xl mx-auto space-y-16">
+          {painPoints.map((point, index) => (
+            <motion.div
+              key={index}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={container}
+              className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
+            >
+              {/* Pain Point */}
+              <motion.div 
+                variants={item}
+                className="bg-white p-8 rounded-xl shadow-sm border border-gray-200"
+              >
+                <div className="flex items-center mb-4">
+                  <div className="p-2 rounded-lg bg-red-50 text-red-600">
+                    {point.icon}
+                  </div>
+                  <h3 className="ml-3 text-lg font-medium text-gray-900">Pain Point</h3>
+                </div>
+                <p className="text-gray-700 text-lg">{point.pain}</p>
+              </motion.div>
 
-      {/* Call-to-Action */}
-      <div className="text-center mt-14">
-        <motion.a
-          href="#cta"
-          className="bg-blue-600 text-white px-8 py-4 rounded-md font-semibold text-xl shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105"
-          initial="hidden"
-          animate={controls}
-          variants={{
-            hidden: { opacity: 0, scale: 0.9 },
-            visible: { opacity: 1, scale: 1, transition: { duration: 0.5, delay: 0.6 } },
-          }}
+              {/* Our Solution */}
+              <motion.div 
+                variants={solutionItem}
+                className="bg-white p-8 rounded-xl shadow-sm border border-gray-200 relative overflow-hidden"
+              >
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-50 to-indigo-50 opacity-60 z-0"></div>
+                <div className="relative z-10">
+                  <div className="flex items-center mb-4">
+                    <div className="p-2 rounded-lg bg-blue-50 text-blue-600">
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <h3 className="ml-3 text-lg font-medium text-gray-900">Our Solution</h3>
+                  </div>
+                  <p className="text-gray-700 text-lg">{point.solution}</p>
+                </div>
+              </motion.div>
+            </motion.div>
+          ))}
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+          className="mt-20 text-center"
         >
-          Dapatkan Solusi Sekarang 🚀
-        </motion.a>
+          <p className="text-sm font-medium text-gray-500">
+            DON'T JUST TAKE OUR WORD FOR IT
+          </p>
+          <motion.div 
+            whileHover={{ scale: 1.02 }}
+            className="mt-6 inline-block px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-900 hover:bg-gray-800 cursor-pointer transition-all duration-300"
+          >
+            See Case Studies
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

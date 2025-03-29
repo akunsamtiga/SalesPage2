@@ -1,100 +1,135 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import { FaChevronDown } from "react-icons/fa";
-
-const faqs = [
-  {
-    question: "Apa manfaat utama dari produk ini?",
-    answer:
-      "Produk ini dirancang untuk meningkatkan produktivitas dan efisiensi Anda dengan fitur-fitur canggih yang mudah digunakan.",
-  },
-  {
-    question: "Apakah saya mendapatkan dukungan pelanggan?",
-    answer:
-      "Ya, kami menyediakan dukungan pelanggan 24/7 untuk membantu Anda dengan semua pertanyaan dan kebutuhan teknis Anda.",
-  },
-  {
-    question: "Bagaimana cara melakukan pembelian?",
-    answer:
-      "Anda dapat membeli produk ini langsung dari website kami dengan beberapa metode pembayaran yang tersedia.",
-  },
-  {
-    question: "Apakah ada jaminan uang kembali?",
-    answer:
-      "Ya, kami menawarkan jaminan uang kembali dalam 30 hari jika Anda tidak puas dengan produk kami.",
-  },
-  {
-    question: "Bisakah saya mengakses materi setelah pembelian?",
-    answer:
-      "Tentu! Setelah pembelian, Anda akan mendapatkan akses penuh ke materi dan pembaruan selamanya.",
-  },
-];
+import { useState } from "react";
 
 const FAQ = () => {
-  const [openIndex, setOpenIndex] = useState(null);
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
+  const [activeIndex, setActiveIndex] = useState(null);
 
-  const toggleFAQ = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
+  const faqs = [
+    {
+      question: "Apakah saya bisa mencoba sebelum membeli?",
+      answer: "Ya! Kami menyediakan uji coba gratis selama 14 hari dengan akses penuh ke semua fitur premium. Tidak diperlukan kartu kredit."
+    },
+    {
+      question: "Bagaimana sistem pembayaran tahunan bekerja?",
+      answer: "Dengan pembayaran tahunan, Anda mendapatkan diskon 20% dibandingkan pembayaran bulanan. Anda akan dikenakan biaya satu kali dalam setahun dan dapat membatalkan kapan saja dengan pemberitahuan 30 hari sebelumnya."
+    },
+    {
+      question: "Apakah saya bisa meng-upgrade atau menurunkan paket saya?",
+      answer: "Tentu! Anda dapat mengubah paket kapan saja. Upgrade berlaku langsung dengan perhitungan biaya prorata, sedangkan penurunan paket akan berlaku pada siklus penagihan berikutnya."
+    },
+    {
+      question: "Metode pembayaran apa yang diterima?",
+      answer: "Kami menerima semua kartu kredit utama (Visa, Mastercard, American Express), PayPal, serta transfer bank untuk kontrak tahunan."
+    },
+    {
+      question: "Bagaimana keamanan data saya terjamin?",
+      answer: "Kami menggunakan enkripsi kelas enterprise, audit keamanan rutin, dan mematuhi regulasi GDPR. Data Anda disimpan di pusat data bersertifikasi SOC 2 Type II."
+    },
+    {
+      question: "Bagaimana kebijakan pembatalan?",
+      answer: "Anda dapat membatalkan kapan saja. Untuk paket bulanan, pembatalan berlaku di akhir siklus tagihan. Untuk paket tahunan, Anda akan menerima pengembalian dana prorata untuk bulan yang tidak terpakai."
+    }
+  ];
+
+  const toggleAccordion = (index) => {
+    setActiveIndex(activeIndex === index ? null : index);
   };
 
   return (
-    <section ref={ref} className="py-20 px-6 md:px-12 bg-[#F8F5F2] text-gray-900">
-      <motion.div
-        className="max-w-5xl mx-auto text-center"
-        initial={{ opacity: 0, y: 30 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8 }}
-      >
-        <h2 className="text-5xl font-bold text-[#8B5E3B]">Pertanyaan Umum</h2>
-        <p className="text-gray-600 mt-4 text-lg">
-          Jawaban untuk pertanyaan yang sering diajukan.
-        </p>
-      </motion.div>
+    <section className="py-24 bg-gray-50">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl font-light text-gray-900 sm:text-4xl">
+            Pertanyaan yang <span className="font-medium">sering diajukan</span>
+          </h2>
+          <p className="mt-4 text-lg text-gray-600">
+            Semua yang perlu Anda ketahui tentang layanan kami.
+          </p>
+        </motion.div>
 
-      {/* FAQ List */}
-      <motion.div
-        className="mt-10 max-w-4xl mx-auto space-y-6"
-        initial={{ opacity: 0, y: 30 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8, delay: 0.2 }}
-      >
-        {faqs.map((faq, index) => (
-          <motion.div
-            key={index}
-            className="border border-[#E0C097] rounded-xl overflow-hidden shadow-md bg-white"
-            whileHover={{ scale: 1.02 }}
-          >
-            <button
-              onClick={() => toggleFAQ(index)}
-              className="w-full flex justify-between items-center p-5 text-lg font-semibold bg-[#F5E8DD] hover:bg-[#EAD6C1] transition duration-300"
-            >
-              {faq.question}
-              <motion.div
-                animate={{ rotate: openIndex === index ? 180 : 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                <FaChevronDown className="text-[#8B5E3B]" />
-              </motion.div>
-            </button>
+        {/* FAQ Items */}
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          transition={{ staggerChildren: 0.1 }}
+          className="space-y-4"
+        >
+          {faqs.map((faq, index) => (
             <motion.div
-              initial="collapsed"
-              animate={openIndex === index ? "open" : "collapsed"}
+              key={index}
               variants={{
-                open: { height: "auto", opacity: 1 },
-                collapsed: { height: 0, opacity: 0 },
+                hidden: { opacity: 0, y: 10 },
+                visible: { opacity: 1, y: 0 }
               }}
-              transition={{ duration: 0.4 }}
               className="overflow-hidden"
             >
-              <p className="p-5 text-gray-700">{faq.answer}</p>
+              <div 
+                className={`border border-gray-200 rounded-lg transition-all ${activeIndex === index ? 'bg-white shadow-sm' : 'bg-white hover:bg-gray-50'}`}
+              >
+                <button
+                  onClick={() => toggleAccordion(index)}
+                  className="flex items-center justify-between w-full p-6 text-left focus:outline-none"
+                >
+                  <h3 className="text-lg font-medium text-gray-900">
+                    {faq.question}
+                  </h3>
+                  <svg
+                    className={`w-5 h-5 text-gray-500 transform transition-transform ${activeIndex === index ? 'rotate-180' : ''}`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
+                <motion.div
+                  initial={{ height: 0 }}
+                  animate={{ 
+                    height: activeIndex === index ? 'auto' : 0,
+                    transition: { duration: 0.3, ease: "easeInOut" }
+                  }}
+                  className="overflow-hidden"
+                >
+                  <div className="px-6 pb-6 pt-0 text-gray-600">
+                    {faq.answer}
+                  </div>
+                </motion.div>
+              </div>
             </motion.div>
-          </motion.div>
-        ))}
-      </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Support CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="mt-16 text-center"
+        >
+          <p className="text-sm font-medium text-gray-500 mb-4">
+            MASIH ADA PERTANYAAN?
+          </p>
+          <button className="px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-all">
+            Hubungi Kami
+          </button>
+        </motion.div>
+      </div>
     </section>
   );
 };
