@@ -12,11 +12,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Furnitur Berkualitas untuk Rumah Impian | FurniCraft",
+  title: "Modewear",
   description:
-    "Temukan koleksi furniture eksklusif dari FurniCraft yang akan mengubah rumah Anda menjadi ruang hidup yang indah, nyaman, dan fungsional.",
-  keywords: "furniture modern, mebel kayu, sofa nyaman, set kamar tidur, furniture kantor, furnitur ruang tamu",
-  author: "FurniCraft Indonesia",
+    "Desain futuristik dengan pattern celestial dan cutting avant-garde.",
+  author: "Sanzystore",
 };
 
 export default function RootLayout({ children }) {

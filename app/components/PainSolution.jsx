@@ -1,12 +1,12 @@
-"use client"
-import React from 'react';
-import { motion } from 'framer-motion';
+"use client";
+import React from "react";
+import { motion } from "framer-motion";
 
 const PainSolution = () => {
   const painPoints = [
     {
-      pain: "Wasting resources on inefficient solutions",
-      solution: "Our optimized platform delivers maximum output with minimal resource input, cutting costs by average 40%",
+      pain: "Wasting time on outdated trends",
+      solution: "Our curated collection keeps you ahead of the latest fashion, saving you time and ensuring you're always on point.",
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -14,8 +14,8 @@ const PainSolution = () => {
       )
     },
     {
-      pain: "Struggling with complex integrations",
-      solution: "Seamless API-first design works out-of-the-box with your existing stack",
+      pain: "Struggling with finding the right fit",
+      solution: "Our personalized fit guide ensures every piece looks perfect on you, regardless of size or body type.",
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
@@ -23,8 +23,8 @@ const PainSolution = () => {
       )
     },
     {
-      pain: "Losing customers to poor experience",
-      solution: "Elevate customer satisfaction with our intuitive, high-performance interface",
+      pain: "Losing style points with poor accessories",
+      solution: "Complete your look with our exclusive accessories, designed to elevate your style to the next level.",
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -81,10 +81,10 @@ const PainSolution = () => {
           className="text-center mb-20"
         >
           <motion.h2 variants={item} className="text-3xl font-light text-gray-900 sm:text-4xl">
-            The <span className="font-medium">Problems</span> We Solve
+            The <span className="font-medium">Fashion Challenges</span> We Solve
           </motion.h2>
           <motion.p variants={item} className="mt-4 max-w-3xl mx-auto text-lg text-gray-600">
-            Every great solution starts with understanding the pain. Here's how we transform your challenges into opportunities.
+            Fashion is all about staying ahead of the curve. Let us help you solve these challenges and bring your style to life.
           </motion.p>
         </motion.div>
 
@@ -107,7 +107,7 @@ const PainSolution = () => {
                   <div className="p-2 rounded-lg bg-red-50 text-red-600">
                     {point.icon}
                   </div>
-                  <h3 className="ml-3 text-lg font-medium text-gray-900">Pain Point</h3>
+                  <h3 className="ml-3 text-lg font-medium text-gray-900">Fashion Dilemma</h3>
                 </div>
                 <p className="text-gray-700 text-lg">{point.pain}</p>
               </motion.div>
@@ -125,7 +125,7 @@ const PainSolution = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <h3 className="ml-3 text-lg font-medium text-gray-900">Our Solution</h3>
+                    <h3 className="ml-3 text-lg font-medium text-gray-900">Our Stylish Solution</h3>
                   </div>
                   <p className="text-gray-700 text-lg">{point.solution}</p>
                 </div>
@@ -142,13 +142,13 @@ const PainSolution = () => {
           className="mt-20 text-center"
         >
           <p className="text-sm font-medium text-gray-500">
-            DON'T JUST TAKE OUR WORD FOR IT
+            SEE WHAT OTHERS ARE SAYING ABOUT OUR STYLE
           </p>
           <motion.div 
             whileHover={{ scale: 1.02 }}
             className="mt-6 inline-block px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-900 hover:bg-gray-800 cursor-pointer transition-all duration-300"
           >
-            See Case Studies
+            Discover Our Lookbooks
           </motion.div>
         </motion.div>
       </div>

@@ -1,8 +1,8 @@
 "use client";
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
-const CountdownTimer = ({ targetDate = '2025-05-31T23:59:59' }) => {
+const CountdownTimer = ({ targetDate = "2025-05-31T23:59:59" }) => {
   const [timeLeft, setTimeLeft] = useState({
     hari: 0,
     jam: 0,
@@ -10,109 +10,93 @@ const CountdownTimer = ({ targetDate = '2025-05-31T23:59:59' }) => {
     detik: 0
   });
 
-  const [isVisible, setIsVisible] = useState(false);
-
   useEffect(() => {
-    // Memicu animasi
-    const timer = setTimeout(() => setIsVisible(true), 500);
-    return () => clearTimeout(timer);
-  }, []);
+    const updateTime = () => {
+      const now = new Date();
+      const target = new Date(targetDate);
+      const diff = target - now;
 
-  useEffect(() => {
-    const calculateTimeLeft = () => {
-      const difference = new Date(targetDate) - new Date();
-      
-      if (difference > 0) {
+      if (diff > 0) {
         setTimeLeft({
-          hari: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          jam: Math.floor((difference / (1000 * 60 * 60)) % 24),
-          menit: Math.floor((difference / 1000 / 60) % 60),
-          detik: Math.floor((difference / 1000) % 60)
+          hari: Math.floor(diff / (1000 * 60 * 60 * 24)),
+          jam: Math.floor((diff / (1000 * 60 * 60)) % 24),
+          menit: Math.floor((diff / 1000 / 60) % 60),
+          detik: Math.floor((diff / 1000) % 60)
         });
+      } else {
+        setTimeLeft({ hari: 0, jam: 0, menit: 0, detik: 0 });
       }
     };
 
-    calculateTimeLeft();
-    const timer = setInterval(calculateTimeLeft, 1000);
-
+    updateTime();
+    const timer = setInterval(updateTime, 1000);
     return () => clearInterval(timer);
   }, [targetDate]);
 
-  // Variasi animasi
-  const containerVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut"
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: (i) => ({
-      opacity: 1,
-      scale: 1,
-      transition: {
-        delay: i * 0.1 + 0.3,
-        type: "spring",
-        stiffness: 200,
-        damping: 10
-      }
-    })
-  };
+  const items = [
+    { label: "Hari", value: timeLeft.hari },
+    { label: "Jam", value: timeLeft.jam },
+    { label: "Menit", value: timeLeft.menit },
+    { label: "Detik", value: timeLeft.detik }
+  ];
 
   return (
-    <section className="py-16 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial="hidden"
-          animate={isVisible ? "visible" : "hidden"}
-          variants={containerVariants}
-          className="text-center"
+    <section
+      className="py-16 bg-white"
+      role="timer"
+      aria-label="Hitung mundur promo fashion"
+    >
+      <div className="max-w-6xl mx-auto px-4 text-center">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-sm font-semibold tracking-widest text-gray-500 uppercase mb-2"
         >
-          <h2 className="text-lg font-medium text-gray-500 mb-2">
-            PENAWARAN TERBATAS
-          </h2>
-          <p className="text-2xl font-light text-gray-700 mb-8">
-            Promo berakhir dalam:
-          </p>
+          Promo Fashion Eksklusif
+        </motion.h2>
 
-          <div className="flex justify-center space-x-4 sm:space-x-6">
-            {Object.entries(timeLeft).map(([unit, value], index) => (
-              <motion.div
-                key={unit}
-                custom={index}
-                variants={itemVariants}
-                className="flex flex-col items-center"
-              >
-                <div className="relative">
-                  <div className="absolute inset-0 bg-white opacity-20 rounded-lg"></div>
-                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center bg-white border border-gray-200 rounded-lg shadow-sm">
-                    <span className="text-2xl sm:text-3xl font-medium text-gray-900">
-                      {value.toString().padStart(2, '0')}
-                    </span>
-                  </div>
-                </div>
-                <span className="mt-2 text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider">
-                  {unit}
-                </span>
-              </motion.div>
-            ))}
-          </div>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="text-2xl sm:text-3xl font-light text-gray-800 mb-10"
+        >
+          Waktu hampir habis!
+        </motion.p>
 
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-            className="mt-8 text-sm text-gray-500"
-          >
-            Jangan lewatkan kesempatan ini! Dapatkan sofa impian Anda sebelum waktu habis.
-          </motion.p>
-        </motion.div>
+        <div className="flex justify-center gap-4 sm:gap-6">
+          {items.map((item, i) => (
+            <motion.div
+              key={item.label}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: i * 0.1 + 0.3 }}
+              className="flex flex-col items-center"
+            >
+              <div className="relative w-20 h-20 sm:w-24 sm:h-24 bg-gray-100 rounded-xl flex items-center justify-center border border-gray-200">
+                <time
+                  className="text-2xl sm:text-3xl font-semibold text-gray-900"
+                  dateTime={item.value.toString()}
+                >
+                  {item.value.toString().padStart(2, "0")}
+                </time>
+              </div>
+              <span className="mt-2 text-xs sm:text-sm uppercase tracking-wide text-gray-500">
+                {item.label}
+              </span>
+            </motion.div>
+          ))}
+        </div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.9 }}
+          className="mt-10 text-sm text-gray-500"
+        >
+          Jangan lewatkan koleksi terbatas kami. Tampil beda di musim ini.
+        </motion.p>
       </div>
     </section>
   );

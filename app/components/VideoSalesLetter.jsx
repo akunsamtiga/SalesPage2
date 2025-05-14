@@ -6,7 +6,7 @@ const VideoSalesLetter = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   
   // Ganti dengan ID video YouTube Anda
-  const youtubeVideoId = "dQw4w9WgXcQ"; // Contoh ID, ganti dengan ID video Anda
+  const youtubeVideoId = "5RjEQF8yEHE"; // Contoh ID, ganti dengan ID video Anda
   const thumbnailUrl = `https://img.youtube.com/vi/${youtubeVideoId}/maxresdefault.jpg`;
   
   const containerVariants = {

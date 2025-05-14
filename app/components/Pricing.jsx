@@ -8,57 +8,57 @@ const Pricing = () => {
 
   const plans = [
     {
-      name: "Pemula",
+      name: "Essentials",
       price: {
         monthly: "Rp750.000",
         annual: "Rp600.000",
       },
-      description: "Cocok untuk profesional individu dan tim kecil",
+      description: "Cocok untuk fashion enthusiast yang ingin tampil stylish setiap saat",
       features: [
-        "Hingga 5 pengguna",
-        "Analitik dasar",
-        "Dukungan email",
-        "Penyimpanan 10GB",
-        "Akses API"
+        "Akses koleksi terbaru",
+        "Konsultasi gaya via chat",
+        "Diskon member 10%",
+        "Pengiriman standar gratis",
+        "Early access produk limited"
       ],
-      cta: "Mulai Sekarang",
+      cta: "Langganan Sekarang",
       featured: false
     },
     {
-      name: "Profesional",
+      name: "Signature",
       price: {
         monthly: "Rp1.500.000",
         annual: "Rp1.200.000",
       },
-      description: "Ideal untuk bisnis yang sedang berkembang dengan kebutuhan lanjutan",
+      description: "Untuk kamu yang ingin fashion statement lebih eksklusif dan personal",
       features: [
-        "Hingga 20 pengguna",
-        "Analitik lanjutan",
-        "Dukungan email prioritas",
-        "Penyimpanan 100GB",
-        "Akses API + webhooks",
-        "Integrasi kustom"
+        "Semua fitur Essentials",
+        "Stylist pribadi bulanan",
+        "Diskon eksklusif 20%",
+        "Pengiriman express gratis",
+        "Akses koleksi kapsul",
+        "Undangan private event"
       ],
       cta: "Coba Gratis",
       featured: true
     },
     {
-      name: "Perusahaan",
+      name: "Couture",
       price: {
         monthly: "Rp3.000.000",
         annual: "Rp2.400.000",
       },
-      description: "Untuk organisasi besar dengan kebutuhan khusus",
+      description: "Layanan premium untuk fashion-forward clientele yang mengutamakan kemewahan",
       features: [
-        "Pengguna tanpa batas",
-        "Analitik lanjutan + AI",
-        "Dukungan telepon 24/7",
-        "Penyimpanan 1TB",
-        "Manajer akun khusus",
-        "Integrasi kustom",
-        "SLA uptime 99,9%"
+        "Semua fitur Signature",
+        "Custom fitting & tailoring",
+        "Akses first-look runway",
+        "Stylist eksklusif on-call",
+        "Membership concierge 24/7",
+        "Undangan fashion show VIP",
+        "Garansi tukar tanpa batas"
       ],
-      cta: "Hubungi Penjualan",
+      cta: "Hubungi Kami",
       featured: false
     }
   ];
@@ -75,12 +75,12 @@ const Pricing = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl font-light text-gray-900 sm:text-4xl">
-            Harga yang <span className="font-medium">sederhana</span> & transparan
+            Pilihan <span className="font-medium">membership fashion</span> yang fleksibel
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-600">
-            Pilih paket yang paling sesuai dengan kebutuhan bisnis Anda.
+            Temukan paket yang paling sesuai dengan gaya dan kebutuhan fashion kamu.
           </p>
-          
+
           {/* Toggle */}
           <div className="mt-8 flex items-center justify-center">
             <span className={`mr-4 text-sm font-medium ${!isAnnual ? 'text-gray-900' : 'text-gray-500'}`}>Bulanan</span>
@@ -119,7 +119,7 @@ const Pricing = () => {
               {plan.featured && (
                 <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                   <span className="inline-flex items-center px-4 py-1 rounded-full bg-gray-900 text-xs font-medium text-white">
-                    Paling Populer
+                    Paling Favorit
                   </span>
                 </div>
               )}
@@ -185,10 +185,10 @@ const Pricing = () => {
           className="mt-16 text-center"
         >
           <p className="text-sm font-medium text-gray-500 mb-4">
-            BUTUH SOLUSI KUSTOM?
+            BUTUH PENGALAMAN BERGAYA YANG LEBIH PERSONAL?
           </p>
           <button className="px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-all">
-            Hubungi Tim Enterprise
+            Hubungi Tim Fashion Concierge
           </button>
         </motion.div>
       </div>
